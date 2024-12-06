@@ -3,6 +3,7 @@
 
 /*  EXERCISE 1
     TODO: Declare a new function type for the sortDescending and sortAscending functions. */
+    type SortDescending = (a:number, b:number) =>number
     
 
 /*  TODO: Convert the sortDescending and sortAscending functions to arrow 
@@ -10,7 +11,7 @@
 
 /*  sortDescending is a comparison function that tells the sort method how to sort 
     numbers in descending order */
-function sortDescending(a, b) {
+let sortDescending:SortDescending = (a, b) =>{
 if (a > b) {
     return -1;
 } else if (b > a) {
@@ -22,7 +23,7 @@ if (a > b) {
 
 /*  sortDescending is a comparison function that tells the sort method how to sort 
     numbers in ascending order. */
-function sortAscending(a, b) {
+let sortAscending:SortDescending=(a, b):number => {
 if (a > b) {
     return 1;
 } else if (b > a) {
@@ -38,7 +39,7 @@ if (a > b) {
 
 /*  TODO: Update the BuildArray function. */
 
-function buildArray(items, sortOrder) {
+function buildArray(items:number, sortOrder:'ascending'| 'descending'):number[] {
     let randomNumbers = [];
     let nextNumber;
     for (let counter = 0; counter < items; counter++) {
@@ -58,13 +59,22 @@ function buildArray(items, sortOrder) {
 
 let myArray1 = buildArray(12, 'ascending');
 let myArray2 = buildArray(8, 'descending');
+console.log(myArray1);
+console.log(myArray2)
 
 /*  EXERCISE 2
     TODO: Update the LoanCalculator function. */
+    interface Loan {
+        principle:number;
+        interestRate: number;
+        months:number;
+    }
 
-function loanCalculator (principle, interestRate, months) {
-    let interest = interestRate / 1200;   // Calculates the monthly interest rate
+function loanCalculator (items:Loan) {
+    let interest = items.interestRate / 1200;   // Calculates the monthly interest rate
     let payment;
-    payment = principle * interest / (1 - (Math.pow(1/(1 + interest), months)));
+    payment = items.principle * interest / (1 - (Math.pow(1/(1 + interest), items.months)));
     return payment.toFixed(2);
 }
+
+console.log(loanCalculator({principle: 3000, interestRate: 6, months: 246}))
